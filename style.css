@@ -49,3 +49,7 @@ div {
     background-color: rgb(146, 83, 205);
     grid-column: span 1;
 }
+
+.clicked    {
+    background-color: yellow;
+}

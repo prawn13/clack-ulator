@@ -10,26 +10,26 @@
 </head>
 <body>
     <div class="calculator">
-        <div class="output">Output</div>
+        <div class="output">0</div>
         <div class="adv">AC</div>
         <div class="adv">+/-</div>
         <div class="adv">%</div>
-        <div class="op">/</div>
+        <div class="op" id="divide" onclick="opClick('/')">/</div>
         <div class="num" onclick="display(7)">7</div>
         <div class="num" onclick="display(8)">8</div>
         <div class="num" onclick="display(9)">9</div>
-        <div class="op">*</div>
+        <div class="op" id="multiply" onclick="opClick('*')">*</div>
         <div class="num" onclick="display(4)">4</div>
         <div class="num" onclick="display(5)">5</div>
         <div class="num" onclick="display(6)">6</div>
-        <div class="op">-</div>
+        <div class="op" id="subtract" onclick="opClick('-')">-</div>
         <div class="num" onclick="display(1)">1</div>
         <div class="num" onclick="display(2)">2</div>
         <div class="num" onclick="display(3)">3</div>
-        <div class="op">+</div>
+        <div class="op" id="plus" onclick="opClick('+')">+</div>
         <div class="num zero" onclick="display(0)">0</div>
         <div class="num">.</div>
-        <div class="op">=</div>
+        <div class="op" id="equals" onClick="opClick('=')">=</div>
        
     </div>
 </body>

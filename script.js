@@ -1,11 +1,16 @@
-function operate(a, b, op)  {
-    const ops = {
-        '+': add,
-        '-': subtract,
-        '/': divide,
-        '*': multiply,
-    };
+const ops = {
+    '+': add,
+    '-': subtract,
+    '/': divide,
+    '*': multiply,
+    '=': equals,
+};
 
+let displayValue = '';
+let lastValue = '';
+let activeOp = '';
+
+function operate(a, b, op)  {
     return ops[op](a, b);
 }
 
@@ -28,8 +33,47 @@ function divide(a, b)   {
     return a / b;
 }
 
+function equals(answer)   {
+    return answer;
+}
+
+function opClick(op)  {
+    activeOp = op;
+    const opButton = document.querySelector('#' + ops[op].name);
+    opButton.classList.toggle('clicked');
+    
+    
+    if (lastValue)    {
+        let answer = operate(lastValue, displayValue, op);
+        display(answer);
+
+    }
+
+    lastValue = displayValue;
+
+    
+}
+
 
 function display(num)  {
-    const output = document.querySelector('.output');
-    output.innerText = num;
+    let output = document.querySelector('.output'); 
+
+    if (activeOp)  {
+        const opButton = document.querySelector('#' + ops[activeOp].name);
+        opButton.classList.toggle('clicked');
+        activeOp = '';
+        displayValue = '';
+    }
+
+    displayValue += num;
+    console.log(displayValue);
+
+    output.innerText = displayValue;
+
 }
+
+document.addEventListener('keydown', (e) => {
+    if (e.key >= 0 && e.key < 10)   {
+        display(e.key);
+    }
+});
