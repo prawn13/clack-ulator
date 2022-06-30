@@ -43,12 +43,18 @@ function equals()  {
 }
 
 function clearUp()    {
+    const clearButton = document.querySelector('.clear');
+    clearButton.classList.toggle('clicked');
     lastValue = null;
     activeOp = null;
     lastOp = null;
     display(0);
 }
 
+function backUp()   {
+    const backButton = document.querySelector('.delete');
+    backButton.classList.toggle('clicked');
+}
 
 function opClick(op)  {
     if (op === '=' && displayValue && lastValue)  {
@@ -83,7 +89,7 @@ function display(num, isNumber = false)  {
     if (isNumber)   {
         displayValue += num;
         activeOp = null;
-        const number = document.querySelector('.n' + num);
+        const number = (num != '.') ? document.querySelector('.n' + num) : document.querySelector('#decimal');
         number.classList.toggle('clicked');
     }
     else{
@@ -95,16 +101,26 @@ function display(num, isNumber = false)  {
 
 document.addEventListener('keydown', (e) => {
     if (e.key >= 0 && e.key < 10)   {
-        display(e.key);
+        display(e.key, true);
     }
+    else if (ops[e.key])    {
+        opClick(e.key);
+    }
+    else if (e.key == 'Backspace')  {
+        backUp();
+    }
+    else if (e.key == 'enter' || e.key == '=')  {
+        opClick('=');
+    }
+    console.log(e.key);
 });
 
 const opButtons = document.querySelectorAll('.op');
 const numButtons = document.querySelectorAll('.num');
 opButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
 numButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
-// const advButtons = document.querySelectorAll('.adv');
-// advButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
+const advButtons = document.querySelectorAll('.adv');
+advButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
 
 
 

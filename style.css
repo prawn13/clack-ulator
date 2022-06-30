@@ -5,6 +5,7 @@ div {
     border-radius: 7px;
     box-shadow: inset 0.5px 2px 2px 0.5px rgb(218, 202, 202);
     font-family: 'Comic Sans MS';
+    transition:all 0.1s;
 }
 
 .calculator {
@@ -33,7 +34,6 @@ div {
 .num    {
     background-color: rgb(7, 116, 79);
     grid-column: span 1;
-    transition:all 0.1s;
 }
 
 .n0   {
@@ -43,20 +43,18 @@ div {
 .op     {
     background-color: rgb(154, 106, 18);
     grid-column: span 1;
-    transition:all 0.1s;
 }
 
 .adv    {
     background-color: rgb(146, 83, 205);
     grid-column: span 1;
-    transition:all 0.1s;
-}
-
-.equals {
-    transition:all 0.1s;
 }
 
 .clicked    {
     background-color: rgba(142, 142, 142, 0.486);
     transform:scale(1.05);
+}
+
+.clear  {
+    grid-column: 1 / 3;
 }

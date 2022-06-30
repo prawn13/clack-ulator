@@ -11,9 +11,8 @@
 <body>
     <div class="calculator">
         <div class="output">0</div>
-        <div class="adv" onclick="clearUp()">AC</div>
-        <div class="adv">+/-</div>
-        <div class="adv">%</div>
+        <div class="adv clear" onclick="clearUp()">clear</div>
+        <div class="adv delete" onclick="backUp()">back</div>
         <div class="op" id="divide" onclick="opClick('/')">/</div>
         <div class="num n7" onclick="display(7, true)">7</div>
         <div class="num n8" onclick="display(8, true)">8</div>
@@ -28,7 +27,7 @@
         <div class="num n3" onclick="display(3, true)">3</div>
         <div class="op" id="add" onclick="opClick('+')">+</div>
         <div class="num n0" onclick="display(0, true)">0</div>
-        <div class="num">.</div>
+        <div class="num" id="decimal" onclick="display('.', true)">.</div>
         <div class="op" id="equals" onClick="opClick('=')">=</div>
        
     </div>
