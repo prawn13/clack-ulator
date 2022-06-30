@@ -5,29 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator">
         <div class="output">0</div>
-        <div class="adv">AC</div>
+        <div class="adv" onclick="clearUp()">AC</div>
         <div class="adv">+/-</div>
         <div class="adv">%</div>
         <div class="op" id="divide" onclick="opClick('/')">/</div>
-        <div class="num" onclick="display(7)">7</div>
-        <div class="num" onclick="display(8)">8</div>
-        <div class="num" onclick="display(9)">9</div>
+        <div class="num n7" onclick="display(7, true)">7</div>
+        <div class="num n8" onclick="display(8, true)">8</div>
+        <div class="num n9" onclick="display(9, true)">9</div>
         <div class="op" id="multiply" onclick="opClick('*')">*</div>
-        <div class="num" onclick="display(4)">4</div>
-        <div class="num" onclick="display(5)">5</div>
-        <div class="num" onclick="display(6)">6</div>
+        <div class="num n4" onclick="display(4, true)">4</div>
+        <div class="num n5" onclick="display(5, true)">5</div>
+        <div class="num n6" onclick="display(6, true)">6</div>
         <div class="op" id="subtract" onclick="opClick('-')">-</div>
-        <div class="num" onclick="display(1)">1</div>
-        <div class="num" onclick="display(2)">2</div>
-        <div class="num" onclick="display(3)">3</div>
-        <div class="op" id="plus" onclick="opClick('+')">+</div>
-        <div class="num zero" onclick="display(0)">0</div>
+        <div class="num n1" onclick="display(1, true)">1</div>
+        <div class="num n2" onclick="display(2, true)">2</div>
+        <div class="num n3" onclick="display(3, true)">3</div>
+        <div class="op" id="add" onclick="opClick('+')">+</div>
+        <div class="num n0" onclick="display(0, true)">0</div>
         <div class="num">.</div>
         <div class="op" id="equals" onClick="opClick('=')">=</div>
        

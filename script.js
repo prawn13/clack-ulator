@@ -3,19 +3,10 @@ const ops = {
     '-': subtract,
     '/': divide,
     '*': multiply,
-    '=': equals,
 };
 
-let displayValue = '';
-let lastValue = '';
-let activeOp = '';
-
-function operate(a, b, op)  {
-    return ops[op](a, b);
-}
-
 function add(a, b)  {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a, b) {
@@ -30,46 +21,76 @@ function divide(a, b)   {
     if (b == 0) {
         return 'i dont think so :)';
     }
-    return a / b;
+    return Math.floor((a / b) * 10000) / 10000;
 }
 
-function equals(answer)   {
+let displayValue = '';
+let lastValue = null;
+let activeOp = null;
+let lastOp = null;
+
+
+function operate(op, a = lastValue, b = displayValue)  {
+    return ops[op](a, b);
+}
+
+
+function equals()  {
+    let answer = operate(lastOp);
+    activeOp = null;
+    display(answer);
     return answer;
 }
 
-function opClick(op)  {
-    activeOp = op;
-    const opButton = document.querySelector('#' + ops[op].name);
-    opButton.classList.toggle('clicked');
-    
-    
-    if (lastValue)    {
-        let answer = operate(lastValue, displayValue, op);
-        display(answer);
-
-    }
-
-    lastValue = displayValue;
-
-    
+function clearUp()    {
+    lastValue = null;
+    activeOp = null;
+    lastOp = null;
+    display(0);
 }
 
 
-function display(num)  {
-    let output = document.querySelector('.output'); 
-
-    if (activeOp)  {
-        const opButton = document.querySelector('#' + ops[activeOp].name);
+function opClick(op)  {
+    if (op === '=' && displayValue && lastValue)  {
+        const opButton = document.querySelector('#equals');
         opButton.classList.toggle('clicked');
-        activeOp = '';
+        equals();
+        lastValue = null;
+        activeOp = null;
+        lastOp = null;
+    }
+    else if (!activeOp && op !== '=') {
+        const opButton = document.querySelector('#' + ops[op].name);
+        opButton.classList.toggle('clicked');
+        activeOp = op;
+    
+        if (lastValue)    {
+            equals();
+        }
+
+        lastOp = op;
+
+        lastValue = displayValue;
+        display(lastValue);
         displayValue = '';
     }
+}
 
-    displayValue += num;
-    console.log(displayValue);
+
+function display(num, isNumber = false)  {
+    let output = document.querySelector('.output'); 
+    
+    if (isNumber)   {
+        displayValue += num;
+        activeOp = null;
+        const number = document.querySelector('.n' + num);
+        number.classList.toggle('clicked');
+    }
+    else{
+        displayValue = num;
+    }
 
     output.innerText = displayValue;
-
 }
 
 document.addEventListener('keydown', (e) => {
@@ -77,3 +98,17 @@ document.addEventListener('keydown', (e) => {
         display(e.key);
     }
 });
+
+const opButtons = document.querySelectorAll('.op');
+const numButtons = document.querySelectorAll('.num');
+opButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
+numButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
+// const advButtons = document.querySelectorAll('.adv');
+// advButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
+
+
+
+function removeTransition(b) {
+    if (b.propertyName !== 'transform') return;
+    this.classList.remove('clicked');
+}
