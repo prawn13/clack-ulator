@@ -28,7 +28,7 @@ let displayValue = '';
 let lastValue = null;
 let activeOp = null;
 let lastOp = null;
-
+let justCalced = false;
 
 function operate(op, a = lastValue, b = displayValue)  {
     return ops[op](a, b);
@@ -41,6 +41,12 @@ function reset()    {
     displayValue = '';
 }
 
+
+function plusMinus()    {
+    displayValue = '-' + displayValue;
+    let output = document.querySelector('.output'); 
+    output.innerText = displayValue;
+}
 
 function equals()  {
     let answer = operate(lastOp);
@@ -62,35 +68,45 @@ function backUp()   {
 }
 
 function opClick(op)  {
-    if (op === '=' && displayValue && lastValue)  {
+    if (op === '=' && displayValue && lastValue && !justCalced)  {
         const opButton = document.querySelector('#equals');
         opButton.classList.toggle('clicked');
         equals();
-        reset();
+        lastValue = displayValue;
+        display(lastValue);
+        // displayValue = '';
     }
+
     else if (!activeOp && op !== '=') {
         const opButton = document.querySelector('#' + ops[op].name);
         opButton.classList.toggle('clicked');
+
         activeOp = op;
-    
-        if (lastValue)    {
-            equals();
-        }
-
         lastOp = op;
-
         lastValue = displayValue;
-        display(lastValue);
         displayValue = '';
+        display(lastValue);
     }
+    justCalced = true;
 }
 
 
 function display(num, isNumber = false)  {
     let output = document.querySelector('.output'); 
     
-    if (isNumber)   {
-        displayValue += num;
+    if (justCalced)   {
+        displayValue = '';
+    }
+
+    if (num === '.' && !displayValue.includes('.'))    {
+        displayValue += (displayValue == '') ? '0.' : '.'
+        // displayValue += num;
+        document.querySelector('.decimal').classList.toggle('clicked');
+    }
+
+    else if (isNumber && num !== '.')   {
+        displayValue = activeOp ? num : displayValue + num;
+        // displayValue += num;
         activeOp = null;
         const number = (num != '.') ? document.querySelector('.n' + num) : document.querySelector('#decimal');
         number.classList.toggle('clicked');
@@ -99,11 +115,12 @@ function display(num, isNumber = false)  {
         displayValue = num;
     }
 
+    justCalced = false;
     output.innerText = displayValue;
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key >= 0 && e.key < 10)   {
+    if (isFinite(e.key) && e.key !== ' ')   {
         display(e.key, true);
     }
     else if (ops[e.key])    {
@@ -114,6 +131,9 @@ document.addEventListener('keydown', (e) => {
     }
     else if (e.key === 'Enter' || e.key === '=')  {
         opClick('=');
+    }
+    else if (e.key === '.') {
+        display('.', true);
     }
 });
 
