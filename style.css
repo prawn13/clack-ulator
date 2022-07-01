@@ -1,11 +1,19 @@
+body{
+    background-image: url("images/crabfam.jpeg");
+    background-size: 100%;
+}
+
 div {
     padding: 10px;
     text-align: center;
-    font-size: 36px;
+    font-size: 50px;
+    color: rgb(220, 255, 105);
+    text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
     border-radius: 7px;
     box-shadow: inset 0.5px 2px 2px 0.5px rgb(218, 202, 202);
     font-family: 'Comic Sans MS';
     transition:all 0.1s;
+    background-position: center;
 }
 
 .calculator {
@@ -34,20 +42,26 @@ div {
 .num    {
     background-color: rgb(7, 116, 79);
     grid-column: span 1;
+    background-image: url("images/sailor.jpeg");
+    background-size: 100%;
 }
 
 .n0   {
-    grid-column: 1 / 3
+    grid-column: 1 / 3;
+    background-image: url("images/cool\ crab.jpeg");
+    background-size: 80%;
 }
 
 .op     {
     background-color: rgb(154, 106, 18);
     grid-column: span 1;
+    background-image: url("images/chef.jpeg");
+    background-size: 100%;
 }
 
 .adv    {
     background-color: rgb(146, 83, 205);
-    grid-column: span 1;
+    grid-column: span 1;   
 }
 
 .clicked    {
@@ -57,4 +71,20 @@ div {
 
 .clear  {
     grid-column: 1 / 3;
+    background-image: url("images/funlobster.jpeg");
+    background-size: 150%;
+    background-position: center;
+}
+
+.delete {
+    background-image: url("images/thumbs.jpeg");
+    background-size: 200%;
+    background-color: red;
+    
+}
+
+.decimal    {
+    font-size: 60px;
+    background-image: url("images/burgercrab.jpeg");
+    background-size: 180%;
 }

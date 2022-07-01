@@ -19,7 +19,7 @@ function multiply(a, b) {
 
 function divide(a, b)   {
     if (b == 0) {
-        return 'i dont think so :)';
+        return 'i dont think so crab:)';
     }
     return Math.floor((a / b) * 10000) / 10000;
 }
@@ -34,6 +34,13 @@ function operate(op, a = lastValue, b = displayValue)  {
     return ops[op](a, b);
 }
 
+function reset()    {
+    lastValue = null;
+    activeOp = null;
+    lastOp = null;
+    displayValue = '';
+}
+
 
 function equals()  {
     let answer = operate(lastOp);
@@ -45,10 +52,8 @@ function equals()  {
 function clearUp()    {
     const clearButton = document.querySelector('.clear');
     clearButton.classList.toggle('clicked');
-    lastValue = null;
-    activeOp = null;
-    lastOp = null;
-    display(0);
+    reset();
+    display('');
 }
 
 function backUp()   {
@@ -61,9 +66,7 @@ function opClick(op)  {
         const opButton = document.querySelector('#equals');
         opButton.classList.toggle('clicked');
         equals();
-        lastValue = null;
-        activeOp = null;
-        lastOp = null;
+        reset();
     }
     else if (!activeOp && op !== '=') {
         const opButton = document.querySelector('#' + ops[op].name);
@@ -106,13 +109,12 @@ document.addEventListener('keydown', (e) => {
     else if (ops[e.key])    {
         opClick(e.key);
     }
-    else if (e.key == 'Backspace')  {
+    else if (e.key === 'Backspace')  {
         backUp();
     }
-    else if (e.key == 'enter' || e.key == '=')  {
+    else if (e.key === 'Enter' || e.key === '=')  {
         opClick('=');
     }
-    console.log(e.key);
 });
 
 const opButtons = document.querySelectorAll('.op');
@@ -121,8 +123,6 @@ opButtons.forEach(button => button.addEventListener('transitionend', removeTrans
 numButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
 const advButtons = document.querySelectorAll('.adv');
 advButtons.forEach(button => button.addEventListener('transitionend', removeTransition));
-
-
 
 function removeTransition(b) {
     if (b.propertyName !== 'transform') return;
